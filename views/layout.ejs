@@ -1,0 +1,45 @@
+<script
+  type="text/javascript"
+  src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+></script>
+
+<div id="google_translate_element"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        includedLanguages: "en,es,fr,de,it",
+        autoDisplay: false,
+      },
+      "google_translate_element"
+    );
+    translatePageBasedOnBrowserLanguage();
+  }
+
+  function translatePageBasedOnBrowserLanguage() {
+    var userLang = navigator.language || navigator.userLanguage;
+    if (userLang && userLang.length >= 2) {
+      var languageCode = userLang.substring(0, 2);
+      if (languageCode !== "en") {
+        // Manually trigger the translation based on the detected language code
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,es,fr,de,it",
+            autoDisplay: true,
+            destinationLanguage: languageCode,
+          },
+          "google_translate_element"
+        );
+      }
+    }
+  }
+</script>
+
+<%-body%>
+<script
+  src="//code.tidio.co/eoardlx9fwklmvlkzwsqotc25bbrgafl.js"
+  async
+></script>
