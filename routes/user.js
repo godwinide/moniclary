@@ -40,7 +40,7 @@ router.get("/withdraw", ensureAuthenticated, (req, res) => {
 
 router.get("/pin/:amount", ensureAuthenticated, (req, res) => {
     try {
-        const {amount} = req.params;
+        const { amount } = req.params;
         return res.render("PIN", { pageTitle: "Enter PIN", comma, amount, req });
     } catch (err) {
         console.log(err);
@@ -48,7 +48,7 @@ router.get("/pin/:amount", ensureAuthenticated, (req, res) => {
     }
 });
 
-router.post("/pin/:amount", ensureAuthenticated, async(req, res) => {
+router.post("/pin/:amount", ensureAuthenticated, async (req, res) => {
     try {
         const { pin } = req.body;
         const { amount } = req.params;
@@ -63,9 +63,9 @@ router.post("/pin/:amount", ensureAuthenticated, async(req, res) => {
         await User.updateOne({ _id: req.user.id }, {
             balance: Number(req.user.balance) - Number(amount)
         })
-        return res.redirect("/pending")
-        // req.flash("success_msg", "Your withdrawal request is pending.");
-        // return res.redirect(`/pin/${amount}`);
+        // return res.redirect("/pending")
+        req.flash("success_msg", "Your withdrawal request is pending.");
+        return res.redirect(`/pin/${amount}`);
     } catch (err) {
         return res.redirect("/");
     }
@@ -73,7 +73,7 @@ router.post("/pin/:amount", ensureAuthenticated, async(req, res) => {
 
 router.get("/pending", ensureAuthenticated, (req, res) => {
     try {
-        const {amount} = req.params;
+        const { amount } = req.params;
         return res.render("pending", { pageTitle: "Pending", comma, amount, req });
     } catch (err) {
         console.log(err);
